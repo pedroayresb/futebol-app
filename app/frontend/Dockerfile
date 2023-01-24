@@ -4,4 +4,4 @@ WORKDIR /app-frontend
 COPY . .
 COPY ./package.json .
 RUN npm install
-CMD ["npm", "install"]
+CMD ["npm", "start"]
