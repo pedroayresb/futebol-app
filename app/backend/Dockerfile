@@ -1,5 +1,5 @@
 FROM node:16.14-alpine
-EXPOSE 5432
+EXPOSE 3001
 WORKDIR /app-backend
 COPY . .
 COPY ./package.json .
