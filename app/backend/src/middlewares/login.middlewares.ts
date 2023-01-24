@@ -5,7 +5,7 @@ const validateEmail = (req: Request, res: Response, next: NextFunction) => {
   const { email }: UserInterface = req.body;
 
   // eslint-disable-next-line max-len
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailRegex = /^[\w-]{5,}@.*$/;
   if (!email) {
     return res.status(400).json({ error: 'All fields must be filled' });
   }
