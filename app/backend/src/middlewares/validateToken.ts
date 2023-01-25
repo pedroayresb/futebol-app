@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from '../auth/jwt';
+import * as jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');
@@ -9,7 +11,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verifyToken(token);
+    const decoded = jwt.verify(token, JWT_SECRET);
     res.locals.user = decoded;
     next();
   } catch (error) {

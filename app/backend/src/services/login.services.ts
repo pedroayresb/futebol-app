@@ -1,6 +1,8 @@
-import jwt from '../auth/jwt';
-import bcrypt from '../auth/Bcrypt';
+import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
 import UserModel from '../database/models/Users';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
 type LoginServiceProps = {
   id?: number;
@@ -24,12 +26,17 @@ class LoginService {
     if (!user) {
       return null;
     }
-    const isPasswordCorrect = bcrypt.compare(this.password as string, user.password);
+    const isPasswordCorrect = bcrypt.compareSync(this.password as string, user.password);
     if (!isPasswordCorrect) {
+      console.log('Incorrect password');
       return null;
     }
-    const token = jwt.createToken(user);
-    return { token };
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+      expiresIn: 60 * 60 * 24 * 7,
+      algorithm: 'HS256',
+    });
+
+    return token;
   }
 
   async getRole() {
