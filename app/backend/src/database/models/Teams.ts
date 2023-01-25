@@ -13,7 +13,7 @@ Teams.init({
     autoIncrement: true,
     field: 'id',
   },
-  name: {
+  teamName: {
     type: DataTypes.STRING,
     allowNull: false,
     field: 'name',

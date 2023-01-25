@@ -9,29 +9,29 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      homeTeamId: {
+      home_team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'teams', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      awayTeamId: {
+      away_team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'teams', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      homeTeamGoals: {
+      home_team_goals: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      awayTeamGoals: {
+      away_team_goals: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      inProgress: {
+      in_Progress: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
