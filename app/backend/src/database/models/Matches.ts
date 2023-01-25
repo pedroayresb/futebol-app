@@ -3,12 +3,12 @@ import Teams from './Teams';
 import db from '.';
 
 class Matches extends Model {
-  public _id!: number;
-  public _homeTeamId!: number;
-  public _homeTeamGoals!: number;
-  public _awayTeamId!: number;
-  public _awayTeamGoals!: number;
-  public _inProgress!: boolean;
+  public id!: number;
+  public homeTeamId!: number;
+  public homeTeamGoals!: number;
+  public awayTeamId!: number;
+  public awayTeamGoals!: number;
+  public inProgress!: boolean;
 
   public static associate() {
     Matches.belongsTo(Teams, { as: 'homeTeam', foreignKey: 'homeTeamId' });
@@ -26,17 +26,17 @@ Matches.init({
   homeTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'home_team_id',
+    field: 'hometeamid',
   },
   homeTeamGoals: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'home_team_goals',
+    field: 'hometeamgoals',
   },
   awayTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'away_team_id',
+    field: 'awayteamid',
     references: {
       model: 'teams',
       key: 'id',
@@ -45,7 +45,7 @@ Matches.init({
   awayTeamGoals: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'away_team_goals',
+    field: 'awayteamgoals',
     references: {
       model: 'teams',
       key: 'id',
@@ -54,7 +54,7 @@ Matches.init({
   inProgress: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: 'in_progress',
+    field: 'inprogress',
   },
 }, {
   underscored: true,

@@ -1,8 +1,6 @@
-import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcryptjs';
+import jwt from '../auth/jwt';
+import bcrypt from '../auth/Bcrypt';
 import UserModel from '../database/models/Users';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
 type LoginServiceProps = {
   id?: number;
@@ -22,24 +20,24 @@ class LoginService {
   }
 
   async loginUser() {
-    const user = await UserModel.findOne({ where: { _email: this.email } });
+    const user = await UserModel.findOne({ where: { email: this.email } });
     if (!user) {
       return null;
     }
-    const isPasswordCorrect = bcrypt.compareSync(this.password as string, user._password);
+    const isPasswordCorrect = bcrypt.compare(this.password as string, user.password);
     if (!isPasswordCorrect) {
       return null;
     }
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1d' });
+    const token = jwt.createToken(user);
     return { token };
   }
 
   async getRole() {
-    const user = await UserModel.findOne({ where: { _id: this.id } });
+    const user = await UserModel.findOne({ where: { id: this.id } });
     if (!user) {
       return null;
     }
-    return user._role;
+    return user.role;
   }
 }
 
