@@ -69,7 +69,7 @@ describe('token middlewares', () => {
   });
 
   it('should return 200 when valid token', async () => {
-    sinon.stub(jwt, 'verify').returns({ id: 1 } as any);
+    sinon.stub(jwt, 'verify').returns({ id: 1, role: 'admin' } as any);
     const response = await chai.request(app).get('/login/validate').set('Authorization', 'token');
     expect(response.status).to.equal(200);
   });

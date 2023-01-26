@@ -1,5 +1,5 @@
-import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcryptjs';
+import JWT from '../auth/jwt';
+import Bcrypt from '../auth/bcrypt';
 import UserModel from '../database/models/Users';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
@@ -26,15 +26,11 @@ class LoginService {
     if (!user) {
       return null;
     }
-    const isPasswordCorrect = bcrypt.compareSync(this.password as string, user.password);
+    const isPasswordCorrect = Bcrypt.compare(this.password as string, user.password);
     if (!isPasswordCorrect) {
-      console.log('Incorrect password');
       return null;
     }
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: 60 * 60 * 24 * 7,
-      algorithm: 'HS256',
-    });
+    const token = new JWT(JWT_SECRET).createToken({ id: user.id, role: user.role });
 
     return token;
   }

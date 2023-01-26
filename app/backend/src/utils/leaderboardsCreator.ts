@@ -134,6 +134,7 @@ class LeaderboardsCreator {
 
   public calculateAllLeaderboards() {
     this.populateLeaderboards();
+    this.populateAwayLeaderboards();
     this.matches.forEach((match) => {
       const homeTeamIndex = this.leaderboards
         .findIndex((team) => team.name === match.homeTeam.teamName);

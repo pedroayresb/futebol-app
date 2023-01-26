@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllMatches,
+import {
   getInProgressMatches,
   createMatch,
   updateMatch,
@@ -12,7 +12,6 @@ const router = Router();
 
 router
   .get('/?', getInProgressMatches)
-  .get('/', getAllMatches)
   .post('/', validateToken, validateMatch, createMatch)
   .patch('/:id', validateToken, updateMatch)
   .patch('/:id/finish', validateToken, finishMatch);

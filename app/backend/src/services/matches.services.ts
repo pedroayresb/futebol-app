@@ -77,6 +77,11 @@ class MatchesService {
   }
 
   async createMatch() {
+    const hasHomeTeam = await Teams.findOne({ where: { id: this.homeTeamId } });
+    const hasAwayTeam = await Teams.findOne({ where: { id: this.awayTeamId } });
+    if (!hasHomeTeam || !hasAwayTeam) {
+      return 'error';
+    }
     const match = await Matches.create({
       homeTeamId: this.homeTeamId,
       awayTeamId: this.awayTeamId,

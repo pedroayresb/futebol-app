@@ -8,6 +8,9 @@ const getAllMatches = async (req: Request, res: Response) => {
 
 const getInProgressMatches = async (req: Request, res: Response) => {
   const { inProgress } = req.query;
+  if (!inProgress) {
+    return getAllMatches(req, res);
+  }
   const isTrue = (inProgress === 'true');
   const matches = await new MatchService({ inProgress: isTrue }).getInProgressMatches();
   return res.status(200).json(matches);
@@ -20,6 +23,9 @@ const createMatch = async (req: Request, res: Response) => {
     awayTeamId,
     homeTeamGoals,
     awayTeamGoals }).createMatch();
+  if (match === 'error') {
+    return res.status(404).json({ message: 'There is no team with such id!' });
+  }
   return res.status(201).json(match);
 };
 
