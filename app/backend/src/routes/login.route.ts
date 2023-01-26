@@ -6,7 +6,7 @@ import validateToken from '../middlewares/validateToken';
 const router = Router();
 
 router
-  .post('/', validateEmail, validatePassword, login)
-  .get('/validate', validateToken, validate);
+  .get('/validate', validateToken, validate)
+  .post('/', validateEmail, validatePassword, login);
 
 export default router;
