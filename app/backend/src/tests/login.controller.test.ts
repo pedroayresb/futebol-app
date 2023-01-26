@@ -23,7 +23,7 @@ describe('Login Controller', () => {
     const password = 'secret_admin';
     const token = 'token';
     const loginService = new LoginService({ email, password });
-    sinon.stub(jwt, 'sign').returns(token as any);
+    const stub = sinon.stub(jwt, 'sign').returns(token as any);
     sinon.stub(loginService, 'loginUser').resolves(token);
     const response = await chai.request(app).post('/login').send({ email, password });
     expect(response.status).to.equal(200);

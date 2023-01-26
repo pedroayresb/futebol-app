@@ -14,27 +14,22 @@ Users.init({
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    field: 'id',
   },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'username',
   },
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'role',
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'email',
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'password',
   },
 }, {
   underscored: true,
