@@ -19,18 +19,24 @@ describe('Leaderboards Service', () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
     sinon.stub(LeaderboardsCreator.prototype, 'calculateAllLeaderboards').returns(mockedAllLeaderboards);
     const response = await LeaderboardsService.getAllClassification();
+
+    expect(response).to.deep.equal(mockedAllLeaderboards);
   });
 
   it('returns home Leaderboards', async () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
     sinon.stub(LeaderboardsCreator.prototype, 'calculateHomeLeaderboards').returns(mockedHomeLeaderboards);
     const response = await LeaderboardsService.getHomeClassification();
+
+    expect(response).to.deep.equal(mockedHomeLeaderboards);
   });
 
   it('returns away Leaderboards', async () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
     sinon.stub(LeaderboardsCreator.prototype, 'calculateAwayLeaderboards').returns(mockedAwayLeaderboards);
     const response = await LeaderboardsService.getAwayClassification();
+
+    expect(response).to.deep.equal(mockedAwayLeaderboards);
   });
 });
 

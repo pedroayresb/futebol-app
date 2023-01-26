@@ -99,10 +99,13 @@ class MatchesService {
     if (!match) {
       return null;
     }
-    match.homeTeamGoals = this.homeTeamGoals as number;
-    match.awayTeamGoals = this.awayTeamGoals as number;
-    await match.save();
-    return match;
+    const matchUpdate = await Matches.update({
+      homeTeamGoals: this.homeTeamGoals,
+      awayTeamGoals: this.awayTeamGoals,
+    }, {
+      where: { id: this.id },
+    });
+    return matchUpdate;
   }
 
   async finishMatch() {
@@ -110,9 +113,10 @@ class MatchesService {
     if (!match) {
       return null;
     }
-    match.inProgress = false;
-    await match.save();
-    return match;
+    const matchUpdate = await Matches.update({ inProgress: false }, {
+      where: { id: this.id },
+    });
+    return matchUpdate;
   }
 }
 

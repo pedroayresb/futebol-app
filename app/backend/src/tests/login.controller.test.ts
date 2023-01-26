@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const INCORRECT_EMAIL_OR_PASSWORD = { error: 'Incorrect email or password' };
+const INCORRECT_EMAIL_OR_PASSWORD = { message: 'Incorrect email or password' };
 
 describe('Login Controller', () => {
   afterEach(sinon.restore);
@@ -27,7 +27,7 @@ describe('Login Controller', () => {
     sinon.stub(loginService, 'loginUser').resolves(token);
     const response = await chai.request(app).post('/login').send({ email, password });
     expect(response.status).to.equal(200);
-    expect(response.body).to.equal(token);
+    expect(response.body).to.deep.equal({ token });
   });
 
   it('should return 401 when no user', async () => {

@@ -115,21 +115,11 @@ class LeaderboardsCreator {
   }
 
   private sortLeaderboards() {
-    this.leaderboards.sort((a, b) => {
-      if (a.totalPoints === b.totalPoints) {
-        if (a.totalVictories === b.totalVictories) {
-          if (a.goalsBalance === b.goalsBalance) {
-            if (a.goalsFavor === b.goalsFavor) {
-              return a.goalsOwn - b.goalsOwn;
-            }
-            return b.goalsFavor - a.goalsFavor;
-          }
-          return b.goalsBalance - a.goalsBalance;
-        }
-        return b.totalVictories - a.totalVictories;
-      }
-      return b.totalPoints - a.totalPoints;
-    });
+    this.leaderboards.sort((a, b) => b.totalPoints - a.totalPoints
+    || b.totalVictories - a.totalVictories
+    || b.goalsBalance - a.goalsBalance
+    || b.goalsFavor - a.goalsFavor
+    || b.goalsOwn - a.goalsOwn);
   }
 
   public calculateAllLeaderboards() {
@@ -154,7 +144,6 @@ class LeaderboardsCreator {
         .findIndex((team) => team.name === match.homeTeam.teamName);
       this.changeHome(homeTeamIndex, match);
     });
-    this.leaderboards.sort((a, b) => b.totalPoints - a.totalPoints);
     this.sortLeaderboards();
     return this.leaderboards;
   }
@@ -166,7 +155,6 @@ class LeaderboardsCreator {
         .findIndex((team) => team.name === match.awayTeam.teamName);
       this.changeAway(awayTeamIndex, match);
     });
-    this.leaderboards.sort((a, b) => b.totalPoints - a.totalPoints);
     this.sortLeaderboards();
     return this.leaderboards;
   }

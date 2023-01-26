@@ -14,8 +14,8 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 
-const ALL_FIELDS_MUST_BE_FILLED = { error: 'All fields must be filled' };
-const INCORRECT_EMAIL_OR_PASSWORD = { error: 'Incorrect email or password' };
+const ALL_FIELDS_MUST_BE_FILLED = { message: 'All fields must be filled' };
+const INCORRECT_EMAIL_OR_PASSWORD = { message: 'Incorrect email or password' };
 
 
 describe('Login middlewares', () => {

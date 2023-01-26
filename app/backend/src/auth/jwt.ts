@@ -16,12 +16,4 @@ export default class JWT {
 
     return token;
   }
-
-  public verifyToken(token: string) {
-    try {
-      return jwt.verify(token, this.secret);
-    } catch (err) {
-      return null;
-    }
-  }
 }
