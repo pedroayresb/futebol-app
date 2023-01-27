@@ -86,7 +86,7 @@ class LeaderboardsCreator {
       this.leaderboards[index].totalVictories += 1;
     } else if (match.homeTeamGoals < match.awayTeamGoals) {
       this.leaderboards[index].totalLosses += 1;
-    } else {
+    } else if (match.homeTeamGoals === match.awayTeamGoals) {
       this.leaderboards[index].totalPoints += 1;
       this.leaderboards[index].totalDraws += 1;
     }
@@ -105,7 +105,7 @@ class LeaderboardsCreator {
       this.leaderboards[index].totalVictories += 1;
     } else if (match.homeTeamGoals > match.awayTeamGoals) {
       this.leaderboards[index].totalLosses += 1;
-    } else {
+    } else if (match.homeTeamGoals === match.awayTeamGoals) {
       this.leaderboards[index].totalPoints += 1;
       this.leaderboards[index].totalDraws += 1;
     }
@@ -114,15 +114,16 @@ class LeaderboardsCreator {
       .toFixed(2));
   }
 
-  private sortLeaderboards() {
-    this.leaderboards.sort((a, b) => b.totalPoints - a.totalPoints
-    || b.totalVictories - a.totalVictories
-    || b.goalsBalance - a.goalsBalance
-    || b.goalsFavor - a.goalsFavor
-    || b.goalsOwn - a.goalsOwn);
+  private async sortLeaderboards() {
+    const sorted = this.leaderboards
+      .sort((a, b) => b.totalPoints - a.totalPoints
+      || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsFavor
+      || a.goalsOwn - b.goalsOwn);
+    this.leaderboards = sorted;
   }
 
-  public calculateAllLeaderboards() {
+  public async calculateAllLeaderboards() {
     this.populateLeaderboards();
     this.populateAwayLeaderboards();
     this.matches.forEach((match) => {
@@ -137,7 +138,7 @@ class LeaderboardsCreator {
     return this.leaderboards;
   }
 
-  public calculateHomeLeaderboards() {
+  public async calculateHomeLeaderboards() {
     this.populateLeaderboards();
     this.matches.forEach((match) => {
       const homeTeamIndex = this.leaderboards
@@ -148,7 +149,7 @@ class LeaderboardsCreator {
     return this.leaderboards;
   }
 
-  public calculateAwayLeaderboards() {
+  public async calculateAwayLeaderboards() {
     this.populateAwayLeaderboards();
     this.matches.forEach((match) => {
       const awayTeamIndex = this.leaderboards

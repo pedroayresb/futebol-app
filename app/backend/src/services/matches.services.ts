@@ -85,7 +85,7 @@ class MatchesService {
     const match = await Matches.create({
       homeTeamId: this.homeTeamId,
       awayTeamId: this.awayTeamId,
-      homeTeamGoals: this.awayTeamGoals,
+      homeTeamGoals: this.homeTeamGoals,
       awayTeamGoals: this.awayTeamGoals,
       inProgress: true,
     });

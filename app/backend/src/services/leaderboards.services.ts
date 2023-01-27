@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import Matches from '../database/models/Matches';
 import Teams from '../database/models/Teams';
 import LeaderboardsCreator from '../utils/leaderboardsCreator';
@@ -36,6 +37,7 @@ class LeaderboardsService {
         ],
       },
     ) as unknown as MatchInterface[];
+    console.log(matches);
     const homeClassification = new LeaderboardsCreator(matches).calculateAllLeaderboards();
     return homeClassification;
   }
