@@ -17,7 +17,7 @@ describe('Leaderboards Service', () => {
 
   it('returns all Leaderboards', async () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
-    sinon.stub(LeaderboardsCreator.prototype, 'calculateAllLeaderboards').returns(mockedAllLeaderboards);
+    sinon.stub(LeaderboardsCreator.prototype, 'calculateAllLeaderboards').returns(mockedAllLeaderboards as any);
     const response = await LeaderboardsService.getAllClassification();
 
     expect(response).to.deep.equal(mockedAllLeaderboards);
@@ -25,7 +25,7 @@ describe('Leaderboards Service', () => {
 
   it('returns home Leaderboards', async () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
-    sinon.stub(LeaderboardsCreator.prototype, 'calculateHomeLeaderboards').returns(mockedHomeLeaderboards);
+    sinon.stub(LeaderboardsCreator.prototype, 'calculateHomeLeaderboards').returns(mockedHomeLeaderboards as any);
     const response = await LeaderboardsService.getHomeClassification();
 
     expect(response).to.deep.equal(mockedHomeLeaderboards);
@@ -33,7 +33,7 @@ describe('Leaderboards Service', () => {
 
   it('returns away Leaderboards', async () => {
     sinon.stub(Matches, 'findAll').resolves(finisedMatches as any);
-    sinon.stub(LeaderboardsCreator.prototype, 'calculateAwayLeaderboards').returns(mockedAwayLeaderboards);
+    sinon.stub(LeaderboardsCreator.prototype, 'calculateAwayLeaderboards').returns(mockedAwayLeaderboards as any);
     const response = await LeaderboardsService.getAwayClassification();
 
     expect(response).to.deep.equal(mockedAwayLeaderboards);
