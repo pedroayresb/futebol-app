@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');
@@ -11,7 +10,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     res.locals.user = decoded;
     next();
   } catch (error) {

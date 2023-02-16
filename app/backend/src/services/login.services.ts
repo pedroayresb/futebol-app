@@ -2,7 +2,7 @@ import JWT from '../auth/jwt';
 import Bcrypt from '../auth/bcrypt';
 import UserModel from '../database/models/Users';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret';
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 type LoginServiceProps = {
   id?: number;

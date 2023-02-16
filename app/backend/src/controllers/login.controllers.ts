@@ -13,9 +13,6 @@ const login = async (req: Request, res: Response) => {
 const validate = async (req: Request, res: Response) => {
   const { user } = res.locals;
   const role = await new LoginService({ id: user.id }).getRole();
-  if (!role) {
-    return res.status(401).json({ message: 'Unauthorized or expired token' });
-  }
   return res.status(200).json({ role });
 };
 
