@@ -272,6 +272,8 @@ Respostas:
 -   200 OK: Partidas encontradas com sucesso.
 - 422 Unprocessable Entity: Não deve ser possivel criar uma partida com dois Ids de time iguais.
 - 404 Not Found: Não deve ser possivel criar uma partida com times que não existam no banco de dados.
+- 401 Unauthorized - Token não autorizado.
+
 
 Request body:
 ```json
@@ -309,6 +311,14 @@ status: 422
 status: 400
 {
 	"message": "There is no team with such id!"
+}
+```
+
+##### Exemplo de resposta de erro (Não autorizado):
+```json
+status: 401
+{
+	"message": "Token must be a valid token"
 }
 ```
 
